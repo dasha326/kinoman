@@ -1,5 +1,7 @@
-export const filmCardTemplate = (task) => {
-    const {title, rating, filmYear, filmDuration, filmGenre, description, comments, posterSrc, isWatchlist, isWatched, isFavorite } = task;
+import {createElement} from "../utils";
+
+const createFilmCardTemplate = (task) => {
+    const {title, rating, filmYear, filmDuration, filmGenre, description, comments, posterSrc, isWatchlist, isWatched, isFavorite} = task;
 
     const isWatchlistClass = isWatchlist ? `film-card__controls-item--active` : ``;
     const isWatchedClass = isWatched ? `film-card__controls-item--active` : ``;
@@ -22,5 +24,27 @@ export const filmCardTemplate = (task) => {
             <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteClass}">Mark as favorite</button>
           </form>
         </article>`
-    )
+    );
 };
+export default class Film {
+    constructor(task) {
+        this._task = task;
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilmCardTemplate(this._task);
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
+}
