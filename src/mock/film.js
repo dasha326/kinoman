@@ -1,6 +1,6 @@
 const titlesNames = [`The Man with the Golden Arm`, `The Great Flamarion`, `Santa Claus Conquers the Martians`, `Made for Each Other`, `The Dance of Life`];
 const posterNames = [`made-for-each-other.png`, `popeye-meets-sinbad.png`, `sagebrush-trail.jpg`, `santa-claus-conquers-the-martians.jpg`, `the-dance-of-life.jpg`, `the-great-flamarion.jpg`, `the-man-with-the-golden-arm.jpg`];
-
+const filmGenres = [`made-for-each-other.png`, `popeye-meets-sinbad.png`, `sagebrush-trail.jpg`, `santa-claus-conquers-the-martians.jpg`, `the-dance-of-life.jpg`, `the-great-flamarion.jpg`, `the-man-with-the-golden-arm.jpg`];
 const getRandomIntegerNumber = (min, max) => {
     return min + Math.floor(Math.random() * (max - min));
 };

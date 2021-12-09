@@ -1,3 +1,5 @@
+import {createElement} from "../utils";
+
 const filmCommentTemplate = (comments) => {
     return comments.map((comment) => {
         return (
@@ -14,13 +16,14 @@ const filmCommentTemplate = (comments) => {
               </p>
             </div>
         </li>`
-        )
-    }).join('\n');
+        );
+    }).join(`\n`);
 };
 
-export const filmDetailTemplate = (task) => {
-    const {title, rating, filmYear, filmDuration, filmGenre, description, comments} = task;
+const createFilmDetailTemplate = (film) => {
+    const {title, rating, filmYear, filmDuration, filmGenre, description, posterSrc, comments} = film;
     const isComments = comments > 1;
+    // eslint-disable-next-line radix
     const commentsMock = filmCommentTemplate(Array.from({length: parseInt(comments)}));
     return (
         `<section class="film-details">
@@ -31,7 +34,7 @@ export const filmDetailTemplate = (task) => {
               </div>
               <div class="film-details__info-wrap">
                 <div class="film-details__poster">
-                  <img class="film-details__poster-img" src="./images/posters/the-great-flamarion.jpg" alt="">
+                  <img class="film-details__poster-img" src="./images/posters/${posterSrc}" alt="">
         
                   <p class="film-details__age">18+</p>
                 </div>
@@ -63,11 +66,11 @@ export const filmDetailTemplate = (task) => {
                     </tr>
                     <tr class="film-details__row">
                       <td class="film-details__term">Release Date</td>
-                      <td class="film-details__cell">30 March 1945</td>
+                      <td class="film-details__cell">${filmYear}</td>
                     </tr>
                     <tr class="film-details__row">
                       <td class="film-details__term">Runtime</td>
-                      <td class="film-details__cell">1h 18m</td>
+                      <td class="film-details__cell">${filmDuration}</td>
                     </tr>
                     <tr class="film-details__row">
                       <td class="film-details__term">Country</td>
@@ -137,9 +140,32 @@ export const filmDetailTemplate = (task) => {
                       </div>
                     </div>
                   </section>
-               `: ``}              
+               ` : ``}              
             </div>
           </form>
         </section>`
-    )
+    );
 };
+
+export default class FilmDetails {
+    constructor(film) {
+        this._film = film;
+        this._element = null;
+    }
+
+    getTemplate() {
+        return createFilmDetailTemplate(this._film);
+    }
+
+    getElement() {
+        if (!this._element) {
+            this._element = createElement(this.getTemplate());
+        }
+
+        return this._element;
+    }
+
+    removeElement() {
+        this._element = null;
+    }
+}

@@ -1,7 +1,7 @@
 import {createElement} from "../utils";
 
-const createFilmCardTemplate = (task) => {
-    const {title, rating, filmYear, filmDuration, filmGenre, description, comments, posterSrc, isWatchlist, isWatched, isFavorite} = task;
+const createFilmCardTemplate = (film) => {
+    const {title, rating, filmYear, filmDuration, filmGenre, description, comments, posterSrc, isWatchlist, isWatched, isFavorite} = film;
 
     const isWatchlistClass = isWatchlist ? `film-card__controls-item--active` : ``;
     const isWatchedClass = isWatched ? `film-card__controls-item--active` : ``;
@@ -27,13 +27,13 @@ const createFilmCardTemplate = (task) => {
     );
 };
 export default class Film {
-    constructor(task) {
-        this._task = task;
+    constructor(film) {
+        this._film = film;
         this._element = null;
     }
 
     getTemplate() {
-        return createFilmCardTemplate(this._task);
+        return createFilmCardTemplate(this._film);
     }
 
     getElement() {
